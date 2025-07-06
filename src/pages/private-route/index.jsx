@@ -1,11 +1,15 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context";
+import { Navigate } from "react-router-dom";
 
+function AuthPage({ children }) {
+  const { user, loading } = useContext(AuthContext);
 
+  if (loading) return <h1>Loading! Please wait</h1>;
 
+  if (user) return children;
 
-export default function AuthRoute(){
-    return (
-        <div>
-        <h1>Auth Page</h1>
-        </div>
-    );
+  return <Navigate to={"/login"} />;
 }
+
+export default AuthPage;
